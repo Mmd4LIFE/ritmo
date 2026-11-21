@@ -23,13 +23,11 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       ENVIRONMENT: production
-      PUBLIC_BASE_URL: https://ritmo.mammad.site
-      MINI_APP_URL: https://ritmo.mammad.site
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-https://ritmo.mammad.site}
+      MINI_APP_URL: ${MINI_APP_URL:-https://ritmo.mammad.site}
     depends_on:
       db:
         condition: service_healthy
-    expose:
-      - "8000"
 
   worker:
     build:
@@ -51,26 +49,24 @@ services:
     build:
       context: ./apps/web
       args:
-        NEXT_PUBLIC_API_URL: https://ritmo.mammad.site
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://ritmo.mammad.site}
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_API_URL: https://ritmo.mammad.site
-    expose:
-      - "3000"
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://ritmo.mammad.site}
     depends_on:
       - api
 
-  cloudflared:
-    image: cloudflare/cloudflared:latest
+  # Single localhost entry for Cloudflare Tunnel (same pattern as crypto/pulse/ludo)
+  edge:
+    image: nginx:1.27-alpine
     restart: unless-stopped
-    profiles: ["tunnel"]
-    command: tunnel --no-autoupdate run
-    environment:
-      TUNNEL_TOKEN: ${TUNNEL_TOKEN}
+    ports:
+      - "127.0.0.1:8097:80"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - api
       - web
-
 
 volumes:
   pgdata:

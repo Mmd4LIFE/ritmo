@@ -1,68 +1,41 @@
 # Cloudflare Tunnel for ritmo.mammad.site
 
-## Prerequisites
+Same pattern as crypto / pulse / ludo on this VPS.
 
-1. Domain `mammad.site` managed in Cloudflare DNS
-2. Cloudflare Zero Trust account
-3. Bot token from [@BotFather](https://t.me/BotFather)
-4. Mini App URL set in BotFather → Bot Settings → Menu Button / Web App: `https://ritmo.mammad.site`
+## App entrypoint
 
-## Create tunnel (dashboard or CLI)
+Docker edge nginx listens on **`127.0.0.1:8097`** and routes:
 
-### Option A — Token (used by docker-compose.prod.yml)
+- `/` → Mini App
+- `/api/*`, `/webhook/*`, `/health` → FastAPI
 
-1. Cloudflare Zero Trust → Networks → Tunnels → Create
-2. Name: `ritmo`
-3. Public hostname:
+## Create tunnel
+
+1. Cloudflare Zero Trust → Networks → Tunnels → Create → name `ritmo`
+2. Public hostname:
    - Hostname: `ritmo.mammad.site`
-   - Path: (empty) → Service: `http://web:3000`
-4. Add another public hostname / path rules (or use Ingress in config):
-   - Path `/api*` → `http://api:8000`
-   - Path `/webhook*` → `http://api:8000`
-   - Path `/health` → `http://api:8000`
+   - Type: HTTP
+   - URL: `localhost:8097`
+3. Copy the tunnel token, then on the VPS:
 
-If the dashboard only allows one service, use a local config file instead (Option B) or put Next.js rewrites in front. Recommended docker network approach with `cloudflared` config:
-
-### Option B — Config file (more control)
-
-`deploy/cloudflared-config.yml`:
-
-```yaml
-tunnel: <TUNNEL_UUID>
-credentials-file: /etc/cloudflared/credentials.json
-
-ingress:
-  - hostname: ritmo.mammad.site
-    path: /api/*
-    service: http://api:8000
-  - hostname: ritmo.mammad.site
-    path: /webhook/*
-    service: http://api:8000
-  - hostname: ritmo.mammad.site
-    path: /health
-    service: http://api:8000
-  - hostname: ritmo.mammad.site
-    service: http://web:3000
-  - service: http_status:404
+```bash
+cd /root/mk-projects/ritmo
+./deploy/install-tunnel.sh '<TUNNEL_TOKEN>'
 ```
-
-Then run cloudflared with that config instead of `TUNNEL_TOKEN`.
 
 ## After tunnel is live
 
-1. Set webhook:
-
 ```bash
-curl "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook" \
-  -d "url=https://ritmo.mammad.site/webhook/telegram" \
-  -d "secret_token=${TELEGRAM_WEBHOOK_SECRET}"
+cd /root/mk-projects/ritmo
+set -a; source .env; set +a
+./deploy/set-telegram.sh
 ```
 
-2. Open the bot → `/start` → Mini App
+Open [@rit_mo_bot](https://t.me/rit_mo_bot) → `/start`.
 
-## VPS hardening checklist
+## Security
 
-- Rotate root password (if ever shared)
-- Add your SSH key; disable `PasswordAuthentication`
-- `ufw allow OpenSSH`; deny public 80/443 if using tunnel only
-- Keep `.env` only on server (`chmod 600`)
+- Rotate root password if it was shared in chat
+- Prefer SSH keys; disable password login
+- Never commit `.env` or bot tokens
+- `chmod 600 /root/mk-projects/ritmo/.env`
