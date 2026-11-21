@@ -75,15 +75,19 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
       for (const kind of selectedHabits) {
         if (have.has(kind)) continue;
         const preset = HABIT_PRESETS.find((p) => p.kind === kind);
-        await api.habits.create(token, {
-          kind,
-          title: th(`kinds.${kind}`),
-          emoji: preset?.emoji,
-        });
+        try {
+          await api.habits.create(token, {
+            kind,
+            title: th(`kinds.${kind}`),
+            emoji: preset?.emoji,
+          });
+        } catch {
+          // Free-tier limit or network — never block the journey
+        }
       }
-      next();
     } finally {
       setBusy(false);
+      next();
     }
   };
 
@@ -92,17 +96,21 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
     setBusy(true);
     try {
       if (!skip && billTitle.trim() && billDue) {
-        await api.bills.create(token, {
-          title: billTitle.trim(),
-          next_due: billDue,
-          warn_days: 3,
-          recurrence: "monthly",
-          currency: "IRR",
-        });
+        try {
+          await api.bills.create(token, {
+            title: billTitle.trim(),
+            next_due: billDue,
+            warn_days: 3,
+            recurrence: "monthly",
+            currency: "IRR",
+          });
+        } catch {
+          // Free-tier limit — continue onboarding
+        }
       }
-      next();
     } finally {
       setBusy(false);
+      next();
     }
   };
 
