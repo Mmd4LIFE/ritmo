@@ -28,10 +28,13 @@ export default function CalendarPage() {
 
   return (
     <div className="page space-y-4">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
+      <div>
+        <h1 className="text-2xl font-semibold">{t("title")}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{t("hint")}</p>
+      </div>
 
       <div className="space-y-2 rounded-xl border border-border bg-card p-3">
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Event" />
+        <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder={t("add")} />
         <Input type="datetime-local" value={when} onChange={(e) => setWhen(e.target.value)} />
         <Button
           className="w-full"

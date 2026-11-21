@@ -43,7 +43,10 @@ export default function HabitsPage() {
 
   return (
     <div className="page space-y-4">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
+      <div>
+        <h1 className="text-2xl font-semibold">{t("title")}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{t("hint")}</p>
+      </div>
 
       <div className="flex flex-wrap gap-2">
         {PRESETS.map((p) => (
@@ -82,6 +85,8 @@ export default function HabitsPage() {
           {t("add")}
         </Button>
       </div>
+
+      {habits.length === 0 && <p className="text-sm text-muted-foreground">{t("empty")}</p>}
 
       <div className="space-y-3">
         {habits.map((h) => (

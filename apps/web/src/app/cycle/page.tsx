@@ -79,7 +79,7 @@ export default function CyclePage() {
             await load();
           }}
         >
-          {t("reminders")}: {data?.reminders_enabled ? "ON" : "OFF"}
+          {t("reminders")}: {data?.reminders_enabled ? t("on") : t("off")}
         </Button>
       </div>
     </div>

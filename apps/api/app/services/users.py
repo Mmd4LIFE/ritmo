@@ -34,7 +34,8 @@ async def get_or_create_user(
         user.username = username or user.username
         user.first_name = first_name or user.first_name
         user.last_name = last_name or user.last_name
-        if locale:
+        # Only seed locale from Telegram if user hasn't finished onboarding yet
+        if locale and not user.onboarding_done:
             user.locale = locale
         await db.flush()
         return user
@@ -44,7 +45,7 @@ async def get_or_create_user(
         username=username,
         first_name=first_name,
         last_name=last_name,
-        locale=locale or "en",
+        locale=locale or "fa",
     )
     db.add(user)
     await db.flush()

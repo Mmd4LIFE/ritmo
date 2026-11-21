@@ -1,32 +1,73 @@
 {
   "app": {
     "name": "Ritmo",
-    "tagline": "One quiet rhythm a day"
+    "tagline": "One quiet message. Your whole day in rhythm."
   },
   "nav": {
     "home": "Home",
     "habits": "Habits",
     "bills": "Bills",
+    "more": "More",
     "cycle": "Cycle",
     "calendar": "Calendar",
     "digest": "Digest",
     "profile": "Profile"
   },
+  "onboarding": {
+    "step": "Step {current} of {total}",
+    "welcomeTitle": "Welcome to Ritmo",
+    "welcomeBody": "Ritmo is your quiet daily companion inside Telegram. One morning message. Streaks that keep you honest. Bill reminders only when they matter.",
+    "welcomePoint1": "Morning digest: weather, calendar, prices, one news item",
+    "welcomePoint2": "Habit streaks with a one-tap check-in",
+    "welcomePoint3": "Bills & subscriptions that warn a few days before due",
+    "welcomePoint4": "Private cycle tracking — only if you want it",
+    "continue": "Continue",
+    "back": "Back",
+    "skip": "Skip for now",
+    "languageTitle": "Choose your language",
+    "languageBody": "You can change this anytime in Profile.",
+    "cityTitle": "Where should we look up weather?",
+    "cityBody": "Used only for your morning digest.",
+    "cityPlaceholder": "e.g. Tehran",
+    "hourTitle": "What time is your morning?",
+    "hourBody": "We'll send one short digest around this hour.",
+    "habitsTitle": "Pick habits to start",
+    "habitsBody": "Tap a few. You can add more later. Streaks make it stick.",
+    "billsTitle": "Got a recurring bill?",
+    "billsBody": "Rent, internet, phone… Ritmo stays quiet until a few days before due.",
+    "billTitlePlaceholder": "e.g. Internet",
+    "billDuePlaceholder": "Next due date",
+    "cycleTitle": "Cycle tracking (optional)",
+    "cycleBody": "Private predictions and gentle reminders. Skip if this isn't for you.",
+    "cycleEnable": "Yes, set this up",
+    "cycleSkip": "No thanks",
+    "doneTitle": "You're ready",
+    "doneBody": "Open Home each day, check in habits, and let Ritmo nudge you only when it matters.",
+    "finish": "Enter Ritmo"
+  },
   "home": {
-    "greeting": "Today",
-    "streaks": "Checked in {checked}/{total}",
-    "bestStreak": "Best streak {n}",
+    "greeting": "Good day",
+    "subtitle": "Your rhythm today",
+    "streaks": "{checked} of {total} habits done",
+    "bestStreak": "Best streak: {n}",
     "nextBill": "Next bill",
     "noBill": "No upcoming bills",
     "premium": "Premium",
-    "openDigest": "Preview digest"
+    "openDigest": "Morning digest settings",
+    "whatIsThis": "Ritmo keeps digest, habits, and bills in one calm place.",
+    "quickHabits": "Habits",
+    "quickBills": "Bills",
+    "quickDigest": "Digest",
+    "setupAgain": "Redo setup"
   },
   "habits": {
     "title": "Habits",
+    "hint": "Tap check-in every day. Don't break the chain.",
     "add": "Add habit",
     "checkin": "Check in",
     "checked": "Done today",
     "streak": "Streak {n}",
+    "empty": "No habits yet. Add one to start a streak.",
     "kinds": {
       "water": "Water",
       "study": "Study",
@@ -37,31 +78,37 @@
   },
   "bills": {
     "title": "Bills",
+    "hint": "Quiet most of the month. Loud only when due.",
     "add": "Add bill",
     "due": "Due {date}",
     "warn": "Warn {n} days before",
     "paid": "Mark paid",
-    "amount": "Amount"
+    "amount": "Amount",
+    "empty": "No bills yet. Add rent, phone, or subscriptions."
   },
   "cycle": {
     "title": "Cycle",
-    "private": "Private to you",
+    "private": "Private — only visible to you",
     "avgCycle": "Avg cycle days",
     "avgPeriod": "Avg period days",
     "lastStart": "Last start",
     "predicted": "Predicted next",
     "log": "Log period start",
-    "reminders": "Reminders"
+    "reminders": "Reminders",
+    "on": "On",
+    "off": "Off"
   },
   "calendar": {
     "title": "Calendar",
     "add": "Add event",
-    "empty": "No events in this range"
+    "empty": "No events yet",
+    "hint": "Manual events show up in your morning digest."
   },
   "digest": {
     "title": "Morning digest",
+    "hint": "One short message each morning. That's enough to stay useful.",
     "city": "City",
-    "hour": "Hour",
+    "hour": "Hour (0–23)",
     "topic": "News topic",
     "prices": "Price symbols",
     "enabled": "Enabled",
@@ -75,12 +122,24 @@
     "quiet": "Quiet hours",
     "notifications": "Notifications",
     "upgrade": "Upgrade to Premium",
-    "premiumActive": "Premium active"
+    "premiumActive": "Premium active",
+    "premiumHint": "In the bot, send /premium to pay with Telegram Stars.",
+    "saved": "Saved"
+  },
+  "more": {
+    "title": "More",
+    "cycle": "Cycle tracking",
+    "calendar": "Calendar",
+    "digest": "Digest settings",
+    "profile": "Profile & language"
   },
   "common": {
     "save": "Save",
+    "next": "Next",
     "loading": "Loading…",
     "error": "Something went wrong",
-    "loginDev": "Continue as dev user"
+    "loginDev": "Continue as dev user",
+    "on": "ON",
+    "off": "OFF"
   }
 }

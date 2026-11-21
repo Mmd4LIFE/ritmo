@@ -38,13 +38,16 @@ async def auth_telegram(body: AuthRequest, db: AsyncSession = Depends(get_db)) -
         validated = validate_webapp_init_data(body.init_data, settings.telegram_bot_token)
         tg_user = validated["user"]
 
+    raw_lang = (tg_user.get("language_code") or "").lower()
+    inferred_locale = "fa" if raw_lang.startswith("fa") else ("en" if raw_lang.startswith("en") else None)
+
     user = await get_or_create_user(
         db,
         telegram_id=int(tg_user["id"]),
         username=tg_user.get("username"),
         first_name=tg_user.get("first_name"),
         last_name=tg_user.get("last_name"),
-        locale=tg_user.get("language_code") if tg_user.get("language_code") in ("en", "fa") else None,
+        locale=inferred_locale,
     )
     token = create_access_token(str(user.id), user.telegram_id)
     return AuthResponse(access_token=token, user=UserOut.model_validate(user))

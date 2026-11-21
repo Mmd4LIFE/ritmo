@@ -2,6 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { api, type User } from "@/lib/api";
+import { useLocale, type AppLocale } from "@/components/locale-provider";
 
 type AuthState = {
   token: string | null;
@@ -10,48 +11,52 @@ type AuthState = {
   error: string | null;
   loginDev: () => Promise<void>;
   refresh: () => Promise<void>;
+  setUserLocal: (user: User) => void;
 };
 
 const AuthContext = createContext<AuthState | null>(null);
 
-declare global {
-  interface Window {
-    Telegram?: {
-      WebApp?: {
-        initData: string;
-        ready: () => void;
-        expand: () => void;
-        themeParams: Record<string, string>;
-        colorScheme: string;
-        openInvoice?: (url: string, cb?: (status: string) => void) => void;
-      };
-    };
-  }
+function normalizeLocale(value?: string | null): AppLocale | null {
+  if (!value) return null;
+  const v = value.toLowerCase();
+  if (v.startsWith("fa")) return "fa";
+  if (v.startsWith("en")) return "en";
+  return null;
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { setLocale } = useLocale();
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const authenticate = useCallback(async (initData: string) => {
-    const res = await api.auth(initData);
-    setToken(res.access_token);
-    setUser(res.user);
-    localStorage.setItem("ritmo_token", res.access_token);
-    if (res.user.locale) {
-      document.cookie = `NEXT_LOCALE=${res.user.locale};path=/;max-age=31536000`;
-    }
-  }, []);
+  const applyUser = useCallback(
+    (next: User) => {
+      setUser(next);
+      const loc = normalizeLocale(next.locale);
+      if (loc) setLocale(loc);
+    },
+    [setLocale]
+  );
+
+  const authenticate = useCallback(
+    async (initData: string) => {
+      const res = await api.auth(initData);
+      setToken(res.access_token);
+      localStorage.setItem("ritmo_token", res.access_token);
+      applyUser(res.user);
+    },
+    [applyUser]
+  );
 
   const refresh = useCallback(async () => {
     const saved = localStorage.getItem("ritmo_token");
     if (!saved) return;
     const me = await api.me(saved);
     setToken(saved);
-    setUser(me);
-  }, []);
+    applyUser(me);
+  }, [applyUser]);
 
   const loginDev = useCallback(async () => {
     await authenticate("dev:10001");
@@ -63,6 +68,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const tg = window.Telegram?.WebApp;
         tg?.ready();
         tg?.expand();
+        if (tg?.colorScheme === "dark") {
+          document.documentElement.setAttribute("data-tg-color-scheme", "dark");
+        }
         if (tg?.initData) {
           await authenticate(tg.initData);
         } else {
@@ -70,7 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (saved) {
             const me = await api.me(saved);
             setToken(saved);
-            setUser(me);
+            applyUser(me);
           }
         }
       } catch (e) {
@@ -79,11 +87,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setLoading(false);
       }
     })();
-  }, [authenticate]);
+  }, [authenticate, applyUser]);
 
   const value = useMemo(
-    () => ({ token, user, loading, error, loginDev, refresh }),
-    [token, user, loading, error, loginDev, refresh]
+    () => ({
+      token,
+      user,
+      loading,
+      error,
+      loginDev,
+      refresh,
+      setUserLocal: applyUser,
+    }),
+    [token, user, loading, error, loginDev, refresh, applyUser]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { DM_Sans, Vazirmatn } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import { cookies } from "next/headers";
 import Script from "next/script";
 import { AuthProvider } from "@/components/auth-provider";
-import { BottomNav } from "@/components/nav";
+import { LocaleProvider } from "@/components/locale-provider";
+import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -23,20 +23,18 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-  const dir = locale === "fa" ? "rtl" : "ltr";
+  const store = await cookies();
+  const initialLocale = store.get("NEXT_LOCALE")?.value === "fa" ? "fa" : "en";
 
   return (
-    <html lang={locale} dir={dir} className={`${dmSans.variable} ${vazirmatn.variable}`}>
+    <html lang={initialLocale} dir={initialLocale === "fa" ? "rtl" : "ltr"} suppressHydrationWarning className={`${dmSans.variable} ${vazirmatn.variable}`}>
       <body className="font-sans antialiased">
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
-        <NextIntlClientProvider messages={messages}>
+        <LocaleProvider initialLocale={initialLocale}>
           <AuthProvider>
-            <main>{children}</main>
-            <BottomNav />
+            <AppShell>{children}</AppShell>
           </AuthProvider>
-        </NextIntlClientProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

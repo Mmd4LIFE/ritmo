@@ -33,7 +33,10 @@ export default function DigestPage() {
 
   return (
     <div className="page space-y-4">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
+      <div>
+        <h1 className="text-2xl font-semibold">{t("title")}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{t("hint")}</p>
+      </div>
 
       <div className="space-y-2 rounded-xl border border-border bg-card p-3">
         <label className="text-sm">{t("city")}</label>
@@ -48,7 +51,7 @@ export default function DigestPage() {
           variant="outline"
           onClick={() => setEnabled((v) => !v)}
         >
-          {t("enabled")}: {enabled ? "ON" : "OFF"}
+          {t("enabled")}: {enabled ? "✓" : "–"}
         </Button>
         <Button
           className="w-full"

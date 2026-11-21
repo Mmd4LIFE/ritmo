@@ -31,10 +31,13 @@ export default function BillsPage() {
 
   return (
     <div className="page space-y-4">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
+      <div>
+        <h1 className="text-2xl font-semibold">{t("title")}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{t("hint")}</p>
+      </div>
 
       <div className="space-y-2 rounded-xl border border-border bg-card p-3">
-        <Input placeholder="Rent / Internet / Phone" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Input placeholder={t("add")} value={title} onChange={(e) => setTitle(e.target.value)} />
         <Input type="date" value={due} onChange={(e) => setDue(e.target.value)} />
         <Input
           placeholder={t("amount")}
@@ -63,6 +66,8 @@ export default function BillsPage() {
           {t("add")}
         </Button>
       </div>
+
+      {bills.length === 0 && <p className="text-sm text-muted-foreground">{t("empty")}</p>}
 
       <div className="space-y-3">
         {bills.map((b) => (
