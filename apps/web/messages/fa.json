@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "ریتمو",
+    "tagline": "یک ریتم آرام در روز"
+  },
+  "nav": {
+    "home": "خانه",
+    "habits": "عادت‌ها",
+    "bills": "قبض‌ها",
+    "cycle": "چرخه",
+    "calendar": "تقویم",
+    "digest": "خلاصه",
+    "profile": "پروفایل"
+  },
+  "home": {
+    "greeting": "امروز",
+    "streaks": "چک‌این {checked}/{total}",
+    "bestStreak": "بهترین زنجیره {n}",
+    "nextBill": "قبض بعدی",
+    "noBill": "قبضی در راه نیست",
+    "premium": "پریمیوم",
+    "openDigest": "پیش‌نمایش خلاصه"
+  },
+  "habits": {
+    "title": "عادت‌ها",
+    "add": "افزودن عادت",
+    "checkin": "ثبت",
+    "checked": "امروز انجام شد",
+    "streak": "زنجیره {n}",
+    "kinds": {
+      "water": "آب",
+      "study": "مطالعه",
+      "gym": "ورزش",
+      "no_smoking": "بدون سیگار",
+      "custom": "سفارشی"
+    }
+  },
+  "bills": {
+    "title": "قبض‌ها",
+    "add": "افزودن قبض",
+    "due": "سررسید {date}",
+    "warn": "{n} روز قبل هشدار",
+    "paid": "پرداخت شد",
+    "amount": "مبلغ"
+  },
+  "cycle": {
+    "title": "چرخه",
+    "private": "فقط برای شما",
+    "avgCycle": "میانگین روزهای چرخه",
+    "avgPeriod": "میانگین روزهای قاعدگی",
+    "lastStart": "شروع قبلی",
+    "predicted": "پیش‌بینی بعدی",
+    "log": "ثبت شروع دوره",
+    "reminders": "یادآوری‌ها"
+  },
+  "calendar": {
+    "title": "تقویم",
+    "add": "افزودن رویداد",
+    "empty": "رویدادی در این بازه نیست"
+  },
+  "digest": {
+    "title": "خلاصه صبحگاهی",
+    "city": "شهر",
+    "hour": "ساعت",
+    "topic": "موضوع خبر",
+    "prices": "نمادهای قیمت",
+    "enabled": "فعال",
+    "preview": "پیش‌نمایش",
+    "save": "ذخیره"
+  },
+  "profile": {
+    "title": "پروفایل",
+    "language": "زبان",
+    "timezone": "منطقه زمانی",
+    "quiet": "ساعات سکوت",
+    "notifications": "اعلان‌ها",
+    "upgrade": "ارتقا به پریمیوم",
+    "premiumActive": "پریمیوم فعال است"
+  },
+  "common": {
+    "save": "ذخیره",
+    "loading": "در حال بارگذاری…",
+    "error": "مشکلی پیش آمد",
+    "loginDev": "ادامه به‌عنوان کاربر توسعه"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "welcome": "به ریتمو خوش آمدید — ریتم روزانه‌تان در یک پیام آرام.",
+  "choose_language": "Choose your language / زبان را انتخاب کنید",
+  "language_set": "زبان روی فارسی تنظیم شد.",
+  "open_mini_app": "باز کردن ریتمو",
+  "habit_checked": "✅ {title} — زنجیره {streak}!",
+  "habit_already": "امروز {title} را قبلاً ثبت کرده‌اید.",
+  "bill_paid": "{title} پرداخت شد. موعد بعدی: {next_due}",
+  "bill_warn": "یادآوری: {title} تا {days} روز دیگر سررسید دارد ({due}).",
+  "streak_nudge": "زنجیره را نشکنید — {count} عادت منتظر چک‌این امروز است.",
+  "cycle_remind": "یادآوری چرخه: پنجره بعدی تقریباً حدود {date} است.",
+  "digest_header": "صبح بخیر — خلاصه روزانه ریتمو",
+  "digest_weather": "هوای {city}: {summary}",
+  "digest_calendar": "امروز: {items}",
+  "digest_prices": "قیمت‌ها: {items}",
+  "digest_news": "خبر: {title}",
+  "premium_required": "پریمیوم عادت و قبض نامحدود را باز می‌کند. از مینی‌اپ ارتقا دهید.",
+  "help": "ریتمو خلاصه صبحگاهی، زنجیره عادت، یادآوری قبض و پیگیری خصوصی چرخه را نگه می‌دارد. برای تنظیمات مینی‌اپ را باز کنید."
+}

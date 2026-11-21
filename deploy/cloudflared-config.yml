@@ -1,0 +1,19 @@
+# Replace TUNNEL_UUID and mount credentials on the VPS.
+# Used when not using TUNNEL_TOKEN mode.
+
+tunnel: TUNNEL_UUID
+credentials-file: /etc/cloudflared/credentials.json
+
+ingress:
+  - hostname: ritmo.mammad.site
+    path: /api/*
+    service: http://api:8000
+  - hostname: ritmo.mammad.site
+    path: /webhook/*
+    service: http://api:8000
+  - hostname: ritmo.mammad.site
+    path: /health
+    service: http://api:8000
+  - hostname: ritmo.mammad.site
+    service: http://web:3000
+  - service: http_status:404

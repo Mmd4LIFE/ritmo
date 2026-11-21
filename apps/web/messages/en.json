@@ -1,0 +1,86 @@
+{
+  "app": {
+    "name": "Ritmo",
+    "tagline": "One quiet rhythm a day"
+  },
+  "nav": {
+    "home": "Home",
+    "habits": "Habits",
+    "bills": "Bills",
+    "cycle": "Cycle",
+    "calendar": "Calendar",
+    "digest": "Digest",
+    "profile": "Profile"
+  },
+  "home": {
+    "greeting": "Today",
+    "streaks": "Checked in {checked}/{total}",
+    "bestStreak": "Best streak {n}",
+    "nextBill": "Next bill",
+    "noBill": "No upcoming bills",
+    "premium": "Premium",
+    "openDigest": "Preview digest"
+  },
+  "habits": {
+    "title": "Habits",
+    "add": "Add habit",
+    "checkin": "Check in",
+    "checked": "Done today",
+    "streak": "Streak {n}",
+    "kinds": {
+      "water": "Water",
+      "study": "Study",
+      "gym": "Gym",
+      "no_smoking": "No smoking",
+      "custom": "Custom"
+    }
+  },
+  "bills": {
+    "title": "Bills",
+    "add": "Add bill",
+    "due": "Due {date}",
+    "warn": "Warn {n} days before",
+    "paid": "Mark paid",
+    "amount": "Amount"
+  },
+  "cycle": {
+    "title": "Cycle",
+    "private": "Private to you",
+    "avgCycle": "Avg cycle days",
+    "avgPeriod": "Avg period days",
+    "lastStart": "Last start",
+    "predicted": "Predicted next",
+    "log": "Log period start",
+    "reminders": "Reminders"
+  },
+  "calendar": {
+    "title": "Calendar",
+    "add": "Add event",
+    "empty": "No events in this range"
+  },
+  "digest": {
+    "title": "Morning digest",
+    "city": "City",
+    "hour": "Hour",
+    "topic": "News topic",
+    "prices": "Price symbols",
+    "enabled": "Enabled",
+    "preview": "Preview",
+    "save": "Save"
+  },
+  "profile": {
+    "title": "Profile",
+    "language": "Language",
+    "timezone": "Timezone",
+    "quiet": "Quiet hours",
+    "notifications": "Notifications",
+    "upgrade": "Upgrade to Premium",
+    "premiumActive": "Premium active"
+  },
+  "common": {
+    "save": "Save",
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "loginDev": "Continue as dev user"
+  }
+}

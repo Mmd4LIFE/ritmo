@@ -1,0 +1,19 @@
+{
+  "welcome": "Welcome to Ritmo — your daily rhythm in one quiet place.",
+  "choose_language": "Choose your language / زبان را انتخاب کنید",
+  "language_set": "Language set to English.",
+  "open_mini_app": "Open Ritmo",
+  "habit_checked": "✅ {title} — streak {streak}!",
+  "habit_already": "You already checked in {title} today.",
+  "bill_paid": "Marked {title} as paid. Next due: {next_due}",
+  "bill_warn": "Reminder: {title} is due in {days} day(s) ({due}).",
+  "streak_nudge": "Don't break the chain — {count} habit(s) waiting for today's check-in.",
+  "cycle_remind": "Cycle reminder: your next period window may start around {date}.",
+  "digest_header": "Good morning — your Ritmo digest",
+  "digest_weather": "Weather in {city}: {summary}",
+  "digest_calendar": "Today: {items}",
+  "digest_prices": "Prices: {items}",
+  "digest_news": "News: {title}",
+  "premium_required": "Premium unlocks unlimited habits and bills. Tap Upgrade in the Mini App.",
+  "help": "Ritmo keeps one morning digest, habit streaks, bill reminders, and private cycle tracking. Open the Mini App to set everything up."
+}

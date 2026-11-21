@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 36 33% 97%;
+  --foreground: 210 24% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 24% 12%;
+  --primary: 168 55% 28%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 35 40% 92%;
+  --secondary-foreground: 210 24% 16%;
+  --muted: 36 20% 93%;
+  --muted-foreground: 210 10% 40%;
+  --accent: 18 70% 48%;
+  --accent-foreground: 0 0% 100%;
+  --border: 30 16% 86%;
+  --input: 30 16% 86%;
+  --ring: 168 55% 28%;
+  --radius: 0.85rem;
+}
+
+.dark,
+[data-tg-color-scheme="dark"] {
+  --background: 210 20% 10%;
+  --foreground: 40 20% 96%;
+  --card: 210 18% 13%;
+  --card-foreground: 40 20% 96%;
+  --primary: 168 45% 42%;
+  --primary-foreground: 210 20% 8%;
+  --secondary: 210 14% 18%;
+  --secondary-foreground: 40 20% 96%;
+  --muted: 210 14% 16%;
+  --muted-foreground: 210 10% 65%;
+  --accent: 18 70% 52%;
+  --accent-foreground: 0 0% 100%;
+  --border: 210 12% 22%;
+  --input: 210 12% 22%;
+  --ring: 168 45% 42%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, hsl(168 40% 70% / 0.18), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, hsl(18 70% 60% / 0.12), transparent 50%),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+  min-height: 100dvh;
+}
+
+.page {
+  @apply mx-auto max-w-lg px-4 pb-28 pt-5;
+}
