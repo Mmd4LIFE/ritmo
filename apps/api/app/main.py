@@ -30,11 +30,14 @@ async def lifespan(_: FastAPI):
         await db.commit()
     if settings.telegram_bot_token and settings.environment != "development":
         webhook_url = f"{settings.public_base_url.rstrip('/')}/webhook/telegram"
-        await bot.set_webhook(
-            webhook_url,
-            secret_token=settings.telegram_webhook_secret,
-            drop_pending_updates=True,
-        )
+        try:
+            await bot.set_webhook(
+                webhook_url,
+                secret_token=settings.telegram_webhook_secret,
+                drop_pending_updates=True,
+            )
+        except Exception as exc:  # domain/tunnel may not exist yet
+            print(f"webhook setup skipped: {exc}")
     yield
     await bot.session.close()
 
